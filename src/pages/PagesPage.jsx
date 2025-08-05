@@ -1,0 +1,1 @@
+export default function PagesPage() { return <div className='p-8'>Pages Page</div>; }

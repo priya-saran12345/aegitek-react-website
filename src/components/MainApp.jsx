@@ -1,0 +1,1 @@
+export default function MainApp() { return <div className='p-8'>Main App Section</div>; }
