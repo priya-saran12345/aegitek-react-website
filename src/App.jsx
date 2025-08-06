@@ -113,8 +113,7 @@ import TrainingInternship from "./pages/TrainingInternship";
 import MilkErp from "./pages/MilkErp";
 import ErpNext from "./pages/ErpNext";
 import MilkTrail from "./pages/MilkTrail";
-import PagesPage from "./pages/PagesPage";
-
+// import FakeVoice from "./pages/FakeVoice";
 const HomePage = () => (
   <>
     <Hero />
@@ -151,7 +150,7 @@ const App = () => {
         <Route path="/products/milk-matrix-erp" element={<MilkErp />} />
         <Route path="/products/erp-next" element={<ErpNext />} />
         <Route path="/products/milk-trail" element={<MilkTrail />} />
-        <Route path="/products" element={<PagesPage />} />
+        {/* <Route path="/products/fake-voice" element={<FakeVoice />} /> */}
       </Routes>
       <Footer />
     </Router>

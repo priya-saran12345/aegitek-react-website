@@ -103,7 +103,7 @@ const MilkTrailApp = () => {
                   Fresh Milk
                 </h1>
                 <h1 className="text-6xl lg:text-7xl font-bold leading-tight">
-                  <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">&</span> More at
+                  <span className="bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">&</span> More at
                 </h1>
                 <h1 className="text-6xl lg:text-7xl font-bold leading-tight text-gray-900">
                   Your Doorstep
@@ -118,7 +118,7 @@ const MilkTrailApp = () => {
               {/* Hero Stats */}
               <div className="grid grid-cols-3 gap-8 py-8">
                 <div className="text-center bg-white/50 backdrop-blur-sm rounded-2xl p-4 shadow-lg">
-                  <div className="text-3xl font-bold text-blue-600">50K+</div>
+                  <div className="text-3xl font-bold text-blue-400">50K+</div>
                   <div className="text-gray-600 text-sm font-medium">Happy Customers</div>
                 </div>
                 <div className="text-center bg-white/50 backdrop-blur-sm rounded-2xl p-4 shadow-lg">
@@ -134,7 +134,7 @@ const MilkTrailApp = () => {
               <div className="flex flex-col sm:flex-row gap-4">
                 <button 
                   onClick={handleDownloadApp}
-                  className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-4 px-8 rounded-2xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 transform hover:scale-105 shadow-xl flex items-center justify-center space-x-2"
+                  className="bg-gradient-to-r from-blue-400 to-blue-500 text-white py-4 px-8 rounded-2xl font-semibold hover:from-blue-400 hover:to-blue-500 transition-all duration-300 transform hover:scale-105 shadow-xl flex items-center justify-center space-x-2"
                 >
                   <span>📱</span>
                   <span>Book Demo</span>
@@ -221,7 +221,7 @@ const MilkTrailApp = () => {
                       onClick={() => setSelectedCategory(category.id)}
                       className={`flex items-center space-x-2 px-4 py-2 rounded-full whitespace-nowrap transition-all ${
                         selectedCategory === category.id
-                          ? 'bg-blue-600 text-white'
+                          ? 'bg-blue-400 text-white'
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       }`}
                     >

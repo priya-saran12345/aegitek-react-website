@@ -4,7 +4,7 @@ import { Link} from "react-router-dom";
 
 // Mock useLocation hook - Replace with actual React Router useLocation in production
 const useLocation = () => ({ pathname: window.location.pathname });
-
+window.scrollTo(0, 0);
 // Memoized ContactItem component for performance
 const ContactItem = React.memo(({ icon, label, value }) => (
   <div className="flex items-center space-x-3">
@@ -34,7 +34,7 @@ const NAVIGATION_DATA = {
     { name: 'Milk Matrix ERP', href: '/products/milk-matrix-erp', id: 'milk-matrix' },
     { name: 'ERP Next', href: '/products/erp-next', id: 'erp-next' },
     { name: 'Milk Trail', href: '/products/milk-trail', id: 'milk-trail' },
-    { name: 'Solutions Overview', href: '/products', id: 'products-overview' }
+    // { name: 'Fake Voice', href: '/products/fake-voice', id: 'fake-voice' }
   ]
 };
 

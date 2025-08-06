@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const TechCompanyPage = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [animatedCards, setAnimatedCards] = useState({});
-  const navigate = useNavigate();
 
   const floatingAnimation = `
     @keyframes float {
@@ -27,7 +25,7 @@ const TechCompanyPage = () => {
   useEffect(() => {
     setIsVisible(true);
 
-    const services = ['software', 'erp', 'milk-matrix-erp', 'web'];
+    const services = ['milk-matrix-erp', 'milktrail', 'erpnext', 'web'];
     services.forEach((service, index) => {
       setTimeout(() => {
         setAnimatedCards(prev => ({ ...prev, [service]: true }));
@@ -36,7 +34,8 @@ const TechCompanyPage = () => {
   }, []);
 
   const handleproductClick = (slug) => {
-    navigate(`/products/${slug}`);
+    console.log(`Navigating to products/${slug}`);
+    // You can implement navigation logic here
     window.scrollTo(0, 0);
   };
 
@@ -49,18 +48,18 @@ const TechCompanyPage = () => {
       features: ['Milk Procurement Management', 'Quality & Pricing Control', 'Sales & Distribution']
     },
     { 
-      name: 'Software Development', 
-      slug: 'software',
-      icon: '💻',
-      description: 'Custom software solutions tailored to your business needs',
-      features: ['Web Applications', 'Desktop Software', 'API Development']
+      name: 'MilkTrail', 
+      slug: 'milktrail',
+      icon: '📱',
+      description: 'Fresh milk and dairy products delivery app for your doorstep convenience',
+      features: ['Order Milk & Dairy Products', 'Local Dairy Integration', 'Doorstep Delivery', 'Real-time Tracking']
     },
     { 
-      name: 'ERP & Industry Automation', 
-      slug: 'erp',
-      icon: '⚙️',
-      description: 'Streamline your business processes with automated solutions',
-      features: ['Process Automation', 'Workflow Management', 'System Integration']
+      name: 'ERP Next', 
+      slug: 'erpnext',
+      icon: '📊',
+      description: 'Flexible, open-source ERP solution for comprehensive business management',
+      features: ['CRM & Inventory Management', 'HR & Accounting', 'Customizable & Modular', 'Cost-Effective Solution']
     },
     { 
       name: 'Web Development', 
@@ -80,7 +79,7 @@ const TechCompanyPage = () => {
           
           {/* Left Side - Image */}
           <div className="relative">
-            <div className="relative overflow-hidden rounded-2xl shadow-2xl transform hover:scale-105 mt-20 transition-transform duration-500 group">
+            <div className="relative overflow-hidden rounded-2xl shadow-2xl transform hover:scale-105 mt-30 transition-transform duration-500 group">
               <img 
                 src="https://i.pinimg.com/736x/40/3c/ba/403cba06e3912f43914aa661adfbb08d.jpg"
                 alt="Professional team working together"
@@ -125,7 +124,7 @@ const TechCompanyPage = () => {
                 <div 
                   key={service.slug}
                   onClick={() => handleproductClick(service.slug)}
-                  className={`group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden border border-gray-100 ${
+                  className={`group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden border border-gray-100 cursor-pointer ${
                     animatedCards[service.slug] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                   }`}
                   style={{ transitionDelay: `${index * 200}ms` }}
@@ -142,10 +141,10 @@ const TechCompanyPage = () => {
                     <p className="text-gray-600 text-sm mb-4 group-hover:text-gray-700 transition-colors duration-200">
                       {service.description}
                     </p>
-                    <div className="space-y-2">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                       {service.features.map((feature, featureIndex) => (
                         <div key={featureIndex} className="flex items-center space-x-2">
-                          <div className="w-1.5 h-1.5 bg-blue-400 rounded-full group-hover:bg-blue-500 transition-colors duration-200"></div>
+                          <div className="w-1.5 h-1.5 bg-blue-400 rounded-full group-hover:bg-blue-500 transition-colors duration-200 flex-shrink-0"></div>
                           <span className="text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-200">
                             {feature}
                           </span>

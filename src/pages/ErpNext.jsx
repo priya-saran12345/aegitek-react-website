@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom'; // Use this for navigation
+
 import { 
   Users, 
   Settings, 
@@ -121,9 +123,11 @@ export default function ERPNextLanding() {
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-xl font-semibold hover:border-blue-600 hover:text-blue-400 transition-all duration-300">
-                  Book a Demo
-                </button>
+                <RouterLink to="/Contact">
+                     <button className="border-2 border-gray-300 text-gray-700 px-8 py-3 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-400 transition-colors">
+                    Book a Demo
+                  </button>
+                </RouterLink>
               </div>
             </div>
             
@@ -180,14 +184,14 @@ export default function ERPNextLanding() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-20 bg-blue-600 text-white">
+      <section className="py-20 bg-blue-400 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-4xl font-bold mb-6">
                 Why Choose ERPNext?
               </h2>
-              <p className="text-xl text-blue-100 mb-8">
+              <p className="text-xl text-white mb-8">
                 Built for the modern enterprise, ERPNext delivers enterprise-grade functionality without the enterprise price tag.
               </p>
               <div className="grid gap-4">
