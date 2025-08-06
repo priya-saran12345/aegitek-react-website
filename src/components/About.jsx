@@ -27,7 +27,7 @@ const TechCompanyPage = () => {
   useEffect(() => {
     setIsVisible(true);
 
-    const services = ['software', 'erp', 'dairy', 'web'];
+    const services = ['software', 'erp', 'milk-matrix-erp', 'web'];
     services.forEach((service, index) => {
       setTimeout(() => {
         setAnimatedCards(prev => ({ ...prev, [service]: true }));
@@ -36,14 +36,14 @@ const TechCompanyPage = () => {
   }, []);
 
   const handleproductClick = (slug) => {
-    navigate(`/pages/${slug}`);
+    navigate(`/products/${slug}`);
     window.scrollTo(0, 0);
   };
 
   const servicesData = [
     { 
       name: 'Milk Matrix ERP', 
-      slug: 'dairy',
+      slug: 'milk-matrix-erp',
       icon: '🐄',
       description: 'End-to-end Dairy ERP System empowering the dairy value chain',
       features: ['Milk Procurement Management', 'Quality & Pricing Control', 'Sales & Distribution']

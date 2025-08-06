@@ -104,7 +104,7 @@ const DropdownMenu = React.memo(({ items, onItemClick, isVisible }) => {
 
   return (
     <div 
-      className="absolute top-full left-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-100 py-2 z-50 opacity-0 translate-y-2 animate-dropdown-fade-in"
+      className="absolute top-full left-0 mt-2 w-60 bg-white rounded-lg shadow-xl border border-gray-100 py-2 z-50 opacity-0 translate-y-2 animate-dropdown-fade-in"
       role="menu"
     >
       {items.map((item, index) => (
