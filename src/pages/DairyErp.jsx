@@ -64,7 +64,7 @@ const BenefitCard = ({ icon, title, description, animationDelay }) => (
 const Hero = () => (
   <section className="relative h-96 flex items-center justify-center text-center text-white overflow-hidden">
     <img
-      src="../src/assets/banner-img6.png"
+      src="/assets/banner-img6.png"
       alt="banner"
       className="absolute inset-0 w-full h-full object-full z-0"
     />

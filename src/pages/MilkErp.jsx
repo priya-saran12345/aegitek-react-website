@@ -55,7 +55,7 @@ export default function MilkMatrixERP() {
             <div className="relative">
               <div className="bg-white rounded-3xl p-4 shadow-2xl">
                 <div className="mb-6">
-                  <img src="../src/assets/milk-img.png" alt="" />
+                  <img src="/assets/milk-img.png" alt="" />
                 </div>
               </div>
               

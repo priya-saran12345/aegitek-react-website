@@ -4,35 +4,35 @@ const TechBanner = () => {
   const companies = [
     {
       id: 1,
-      logo: "../src/assets/1.png",
+      logo: "/assets/1.png",
     },
     {
       id: 2,
-      logo: "../src/assets/2.png",
+      logo: "/assets/2.png",
     },
     {
       id: 3,
-      logo: "../src/assets/3.png",
+      logo: "/assets/3.png",
     },
     {
       id: 4,
-      logo: "../src/assets/4.png",
+      logo: "/assets/4.png",
     },
     {
       id: 5,
-      logo: "../src/assets/5.png",
+      logo: "/assets/5.png",
     },
     {
       id: 6,
-      logo: "../src/assets/6.png",
+      logo: "/assets/6.png",
     },
     {
       id: 7,
-      logo: "../src/assets/8.png",
+      logo: "/assets/8.png",
     },
     {
       id: 8,
-      logo: "../src/assets/9.png",
+      logo: "/assets/9.png",
     }
   ];
 
@@ -44,7 +44,7 @@ const TechBanner = () => {
 
   return (
     <div
-      style={{ backgroundImage: "url('../src/assets/banner-img2.png')", backgroundSize: 'cover', overflow: 'hidden' }}
+      style={{ backgroundImage: "url('./assets/banner-img2.png')", backgroundSize: 'cover', overflow: 'hidden' }}
       className="w-full py-12 px-4 overflow-hidden "
     >
       <div className="max-w-full mx-auto px-8 relative">

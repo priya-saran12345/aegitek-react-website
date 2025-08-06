@@ -45,7 +45,7 @@ const CommunicationIcon = (props) => (
 const Hero = () => (
     <section className="relative h-100 flex items-center justify-center text-center text-white overflow-hidden">
         <img
-            src="https://rstheme.com/products/html/braintech/assets/images/breadcrumbs/3.jpg"
+            src="/assets/banner-img5.png"
             alt="Abstract technology background"
             className="absolute inset-0 w-full h-full object-cover z-0"
         />

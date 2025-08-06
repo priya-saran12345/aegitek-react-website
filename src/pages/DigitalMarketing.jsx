@@ -168,7 +168,7 @@ export default function DigitalMarketingSEOPage() {
       {/* Hero Section */}
       <section className="relative h-96 flex items-center justify-center text-center text-white overflow-hidden ">
         <img
-          src="../src/assets/banner-img1.png"
+          src="/assets/banner-img1.png"
           alt="banner"
           className="absolute inset-0 w-full h-100 object-full z-0"
         />
@@ -270,9 +270,6 @@ export default function DigitalMarketingSEOPage() {
           </div>
         </div>
       </section>
-
-      {/* The rest of the sections */}
-      {/* Industries, Marketing Process, etc. will follow the same fix pattern for animationDelay */}
     </div>
   );
 }

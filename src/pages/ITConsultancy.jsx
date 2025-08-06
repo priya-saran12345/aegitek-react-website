@@ -128,7 +128,7 @@ export default function ITConsultancyPage() {
       {/* Hero Section */}
       <section className="relative h-96 flex items-center justify-center text-center text-white overflow-hidden ">
         <img
-          src="../src/assets/banner-img4.png"
+          src="/assets/banner-img4.png"
           alt="banner"
           className="absolute inset-0 w-full h-100 object-full z-0"
         />

@@ -131,7 +131,7 @@ export default function ERPNextLanding() {
               {/* Image Container */}
               <div className="bg-white rounded-3xl shadow-2xl p-4 transform hover:scale-105 transition-all duration-500">
                 <img 
-                  src="../src/assets/ERPNext.png" 
+                  src="/assets/ERPNext.png" 
                   alt="ERPNext img" 
                   className="w-full h-auto rounded-2xl"
                 />

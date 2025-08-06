@@ -96,7 +96,7 @@ const InfiniteTeamCarousel = () => {
   return (
     
     <div className="relativ w-full py-20 px-4  overflow-hidden text-white"
-    style={{ backgroundImage: "url('../src/assets/banner-img4.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}
+    style={{ backgroundImage: "url('/assets/banner-img4.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}
      >
       
       <div className="max-w-full mx-auto relative">

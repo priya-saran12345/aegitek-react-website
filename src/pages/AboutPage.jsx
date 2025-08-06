@@ -64,7 +64,7 @@ export default function OurStoryPage() {
     <div className="min-h-screen bg-white font-['Inter']">
       {/* Hero Section with Background Image */}
       <section className="relative h-[400px] md:h-[400px] lg:h-[400px] bg-cover bg-center flex items-center justify-center"
-        style={{ backgroundImage: "url(../src/assets/banner-img3.png)"}}>
+        style={{ backgroundImage: "url(/assets/banner-img3.png)"}}>
         <div className="absolute inset-0 bg-black opacity-40"></div>
         <div className="relative z-10 text-center text-white p-4">
           <h1 className="text-4xl lg:text-6xl font-bold mb-4 drop-shadow-lg">
@@ -95,7 +95,7 @@ export default function OurStoryPage() {
           {/* Right Column for "Our Team" Image */}
           <div className="lg:col-span-1 flex justify-center">
             <img
-              src="../src/assets/banner-img4.png"
+              src="/assets/banner-img4.png"
               alt="Our Team"
               className="w-full h-auto rounded-lg shadow-lg object-cover"
             />
@@ -109,7 +109,7 @@ export default function OurStoryPage() {
           {/* Left Column for Specialization Image */}
           <div className="lg:col-span-1 flex justify-center lg:justify-start">
             <img
-              src="../src/assets/banner-img6.png"
+              src="/assets/banner-img6.png"
               alt="Specialization Icon"
               className="w-full h-auto rounded-lg shadow-md object-cover max-w-[300px] lg:max-w-full mt-20"
             />

@@ -148,7 +148,7 @@ export default function AIMLRPAPage() {
 
       <section className="relative h-96 flex items-center justify-center text-center text-white overflow-hidden ">
         <img
-          src="../src/assets/banner-img3.png"
+          src="/assets/banner-img3.png"
           alt="banner"
           className="absolute inset-0 w-full h-100 object-full z-0"
         />

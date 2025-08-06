@@ -76,7 +76,7 @@ export default function ContactPage() {
     <div className="min-h-screen bg-white font-['Inter']">
       {/* Hero Section */}
       <section className="relative h-[300px] md:h-[400px] bg-cover bg-center flex items-center justify-center"
-        style={{ backgroundImage: "url('../src/assets/bg-1.jpg')" }}>
+        style={{ backgroundImage: "url('/assets/bg-1.jpg')" }}>
         <div className="absolute inset-0 bg-black opacity-40"></div> {/* Overlay for text readability */}
         <div className="relative z-10 text-center text-white p-4">
           <h1 className="text-4xl lg:text-5xl font-bold mb-4 drop-shadow-lg">

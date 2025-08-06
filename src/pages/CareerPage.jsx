@@ -55,7 +55,7 @@ export default function CareersPage() {
             {/* Hero Section */}
             <section className="relative h-100 flex items-center justify-center text-center text-white overflow-hidden">
                 <img
-                    src="../src/assets/bg-2.jpg"
+                    src="/assets/bg-2.jpg"
                     alt="A modern office environment with a collaborative team"
                     className="absolute inset-0 w-full h-full object-cover z-0"
                 />
@@ -140,14 +140,6 @@ export default function CareersPage() {
                     Connect With Us
                   </button>
                 </RouterLink>
-                        {/* <div className="mt-8">
-                            <a 
-                                href="mailto:careers@aegitek.com" 
-                                className="inline-block bg-[#189cd2] text-white font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition-all transform hover:scale-105"
-                            >
-                                Connect With Us
-                            </a>
-                        </div> */}
                     </div>
                 </div>
             </section>

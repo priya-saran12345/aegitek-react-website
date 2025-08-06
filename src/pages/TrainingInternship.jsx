@@ -58,7 +58,7 @@ export default function TrainingInternshipPage() {
             {/* Hero Section */}
             <section className="relative h-96 flex items-center justify-center text-center text-white overflow-hidden ">
                 <img
-                    src="../src/assets/bg-2.jpg"
+                    src="/assets/bg-2.jpg"
                     alt="banner"
                     className="absolute inset-0 w-full h-100 object-cover z-0"
                 />
