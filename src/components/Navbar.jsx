@@ -1,12 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { MapPin, Mail, Phone, Menu, X, ChevronDown } from 'lucide-react';
-
-// Mock Link component - Replace with actual React Router Link in production
-const Link = ({ to, children, className, onClick, ...props }) => (
-  <a href={to} className={className} onClick={onClick} {...props}>
-    {children}
-  </a>
-);
+import { Link} from "react-router-dom";
 
 // Mock useLocation hook - Replace with actual React Router useLocation in production
 const useLocation = () => ({ pathname: window.location.pathname });
