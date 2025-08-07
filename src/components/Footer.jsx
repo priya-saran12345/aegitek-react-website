@@ -171,11 +171,11 @@ const AegitekFooter = () => {
                 Home
               </Link>
               <span className="text-gray-300">•</span>
-              <Link to="/about" className="text-gray-600 hover:text-blue-400 text-sm transition-colors">
+              <Link to="/AboutPage" className="text-gray-600 hover:text-blue-400 text-sm transition-colors">
                 About
               </Link>
               <span className="text-gray-300">•</span>
-              <Link to="/services" className="text-gray-600 hover:text-blue-400 text-sm transition-colors">
+              <Link to="/services/Dairy-ERP" className="text-gray-600 hover:text-blue-400 text-sm transition-colors">
                 Services
               </Link>
               <span className="text-gray-300">•</span>
