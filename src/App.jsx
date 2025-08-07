@@ -83,16 +83,16 @@
 
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ScrollToTop from "./components/ScrollToTop";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 // Homepage components
 import Hero from "./components/Hero";
-import About from "./components/About";
 import ServicePge from "./components/ServicePge";
+import About from "./components/About";
 import AutoSlide from "./components/AutoSlide";
 import WhyChooseUs from "./components/WhyChooseUs";
-import Team from "./components/Team";
 import Contact from "./components/Contact";
 
 // Pages
@@ -117,11 +117,10 @@ import MilkTrail from "./pages/MilkTrail";
 const HomePage = () => (
   <>
     <Hero />
-    <About />
     <ServicePge />
+    <About />
     <AutoSlide />
     <WhyChooseUs />
-    <Team />
     <Contact />
   </>
 );
@@ -129,6 +128,7 @@ const HomePage = () => (
 const App = () => {
   return (
     <Router>
+            <ScrollToTop />
       <Navbar />
       <Routes>
         {/* Main Pages */}

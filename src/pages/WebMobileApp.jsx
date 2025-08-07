@@ -45,7 +45,7 @@ const LaunchIcon = (props) => (
 const Hero = () => (
     <section className="relative h-100 flex items-center justify-center text-center text-white overflow-hidden">
         <img
-            src="https://rstheme.com/products/html/braintech/assets/images/breadcrumbs/4.jpg"
+            src="/assets/bg-2.jpg"
             alt="Abstract background showing web and mobile app development concepts"
             className="absolute inset-0 w-full h-full object-cover z-0"
         />

@@ -17,17 +17,17 @@ const SimpleSlider = () => {
       description: 'Build powerful applications designed specifically for your unique business requirements'
     },
     {
-      image: '/assets/banner-img4.png',
+      image: 'assets/bg-3.jpg',
       title: 'Web & Mobile App Development',
       description: 'Responsive web and mobile apps that deliver exceptional user experiences across all devices'
     },
     {
-      image: '/assets/banner-img5.png',
+      image: 'assets/bg-4.jpeg',
       title: 'IT Consultancy & System Integration',
       description: 'Harness the power of AI to transform your business processes and decision-making'
     },
     {
-      image: '/assets/banner-img1.png',
+      image: 'assets/bg-5.jpeg',
       title: 'Digital Marketing & SEO',
       description: 'Secure, reliable cloud services that grow with your business needs'
     }
@@ -55,7 +55,7 @@ const SimpleSlider = () => {
   }, [slides.length]);
 
   return (
-    <div className="w-full h-screen relative overflow-hidden bg-gray-900">
+    <div className="w-full h-screen relative overflow-hidden">
       <div className="relative h-full">
         {/* Main slider container */}
         {slides.map((slide, index) => (
@@ -69,14 +69,14 @@ const SimpleSlider = () => {
             <img
               src={slide.image}
               alt={`Slide ${index + 1}`}
-              className="w-full h-full object-full filter brightness-75 contrast-125"
+              className="w-full h-full object-full contrast-125"
               style={{
                 filter: 'brightness(0.75) contrast(1.25) hue-rotate(-30deg) saturate(0.8)'
               }}
             />
             
             {/* Dark overlay - changed to remove purple tints */}
-            <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 via-gray-800/60 to-transparent"></div>
+            {/* <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 via-gray-800/60 to-transparent"></div> */}
             
             {/* Animated Text Content */}
             <div className="absolute inset-0 flex items-center justify-start">
@@ -96,13 +96,13 @@ const SimpleSlider = () => {
                       ? 'translate-y-0 opacity-100' 
                       : 'translate-y-12 opacity-0'
                   }`}>
-                    <span className="bg-gradient-to-r from-white via-blue-100 to-blue-200 bg-clip-text text-transparent">
+                    <span className="text-shadow-lg/30">
                       {slide.title}
                     </span>
                   </h1>
                   
                   {/* Description */}
-                  <p className={`text-lg md:text-xl text-gray-100 mb-8 max-w-2xl leading-relaxed transform transition-all duration-1000 delay-900 ${
+                  <p className={`text-lg md:text-xl text-gray-100 mb-8 max-w-4xl leading-relaxed transform transition-all duration-1000 delay-900 text-shadow-lg/30 ${
                     index === currentSlide 
                       ? 'translate-y-0 opacity-100' 
                       : 'translate-y-8 opacity-0'

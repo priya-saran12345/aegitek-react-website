@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import {Star, Truck, Clock, Shield, MapPin } from 'lucide-react';
+import { Star, Truck, Clock, Shield, MapPin } from 'lucide-react';
+import { Link as RouterLink } from 'react-router-dom';
 
 const MilkTrailApp = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -8,90 +9,84 @@ const MilkTrailApp = () => {
     {
       id: 1,
       name: 'Whole Milk',
-      price: 5.00,
+      price: 5.0,
       image: '🥛',
       category: 'milk',
       description: 'Fresh, creamy whole milk from local farms',
       rating: 4.8,
       inStock: true,
-      unit: '1 Liter'
+      unit: '1 Liter',
     },
     {
       id: 2,
       name: 'Paneer',
-      price: 5.00,
+      price: 5.0,
       image: '🧀',
       category: 'dairy',
       description: 'Fresh homemade paneer, perfect for cooking',
       rating: 4.7,
       inStock: true,
-      unit: '250g'
+      unit: '250g',
     },
     {
       id: 3,
       name: 'Ghee',
-      price: 8.00,
+      price: 8.0,
       image: '🫙',
       category: 'dairy',
       description: 'Pure desi ghee made from cow milk',
       rating: 4.9,
       inStock: true,
-      unit: '200ml'
+      unit: '200ml',
     },
     {
       id: 4,
       name: 'Curd',
-      price: 2.80,
+      price: 2.8,
       image: '🥣',
       category: 'dairy',
       description: 'Fresh yogurt, rich in probiotics',
       rating: 4.6,
       inStock: true,
-      unit: '500g'
+      unit: '500g',
     },
     {
       id: 5,
       name: 'Butter',
-      price: 4.00,
+      price: 4.0,
       image: '🧈',
       category: 'dairy',
       description: 'Creamy fresh butter, unsalted',
       rating: 4.5,
       inStock: true,
-      unit: '200g'
+      unit: '200g',
     },
     {
       id: 6,
       name: 'Toned Milk',
-      price: 4.50,
+      price: 4.5,
       image: '🥛',
       category: 'milk',
       description: 'Low-fat toned milk, healthy choice',
       rating: 4.4,
       inStock: true,
-      unit: '1 Liter'
-    }
+      unit: '1 Liter',
+    },
   ];
 
   const categories = [
     { id: 'all', name: 'All Products', icon: '🛒' },
     { id: 'milk', name: 'Milk', icon: '🥛' },
-    { id: 'dairy', name: 'Dairy Products', icon: '🧀' }
+    { id: 'dairy', name: 'Dairy Products', icon: '🧀' },
   ];
 
-  const filteredProducts = selectedCategory === 'all' 
-    ? products 
-    : products.filter(product => product.category === selectedCategory);
-
-  const handleDownloadApp = () => {
-    // In production, this would open app store or download link
-    console.log('Redirecting to app store...');
-  };
-
+  const filteredProducts =
+    selectedCategory === 'all'
+      ? products
+      : products.filter((product) => product.category === selectedCategory);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
-      
       {/* Hero Section */}
       <div className="relative min-w-full bg-gradient-to-br from-blue-50 via-white to-blue-100 overflow-hidden">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -103,18 +98,21 @@ const MilkTrailApp = () => {
                   Fresh Milk
                 </h1>
                 <h1 className="text-6xl lg:text-7xl font-bold leading-tight">
-                  <span className="bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">&</span> More at
+                  <span className="bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+                    &amp;
+                  </span>{' '}
+                  More at
                 </h1>
                 <h1 className="text-6xl lg:text-7xl font-bold leading-tight text-gray-900">
                   Your Doorstep
                 </h1>
               </div>
-              
+
               <p className="text-xl text-gray-700 leading-relaxed max-w-xl font-medium">
-                Order premium milk and dairy products from your local dairy, powered by Milk Matrix ERP. 
+                Order premium milk and dairy products from your local dairy, powered by Milk Matrix ERP.
                 Fresh, pure, and delivered daily to your doorstep.
               </p>
-              
+
               {/* Hero Stats */}
               <div className="grid grid-cols-3 gap-8 py-8">
                 <div className="text-center bg-white/50 backdrop-blur-sm rounded-2xl p-4 shadow-lg">
@@ -130,15 +128,14 @@ const MilkTrailApp = () => {
                   <div className="text-gray-600 text-sm font-medium">Service</div>
                 </div>
               </div>
-              
+
+              {/* ✅ Book a Demo Button */}
               <div className="flex flex-col sm:flex-row gap-4">
-                <button 
-                  onClick={handleDownloadApp}
-                  className="bg-gradient-to-r from-blue-400 to-blue-500 text-white py-4 px-8 rounded-2xl font-semibold hover:from-blue-400 hover:to-blue-500 transition-all duration-300 transform hover:scale-105 shadow-xl flex items-center justify-center space-x-2"
-                >
-                  <span>📱</span>
-                  <span>Book Demo</span>
-                </button>
+                <RouterLink to="/Contact">
+                  <button className="border-2 border-gray-300 text-gray-700 px-8 py-3 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-400 transition-colors">
+                    Book a Demo
+                  </button>
+                </RouterLink>
               </div>
             </div>
 
@@ -146,9 +143,9 @@ const MilkTrailApp = () => {
             <div className="relative lg:ml-8">
               <div className="relative">
                 <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-4 shadow-2xl border border-white/20">
-                  <img 
-                    src="https://docstore.indusappstore.com/public/external/indus-images/preview_images/ss3_f34b0503-c47f-40d5-9c08-03eea28397dc.webp" 
-                    alt="MilkTrail App Preview" 
+                  <img
+                    src="/assets/milktest.webp"
+                    alt="MilkTrail App Preview"
                     className="rounded-2xl w-full h-auto max-w-md mx-auto shadow-lg"
                   />
                 </div>
@@ -156,21 +153,13 @@ const MilkTrailApp = () => {
             </div>
           </div>
         </div>
-        
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-0 left-0 w-full h-full" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234F46E5' fill-opacity='0.1'%3E%3Ccircle cx='7' cy='7' r='7'/%3E%3Ccircle cx='53' cy='7' r='7'/%3E%3Ccircle cx='30' cy='30' r='7'/%3E%3Ccircle cx='7' cy='53' r='7'/%3E%3Ccircle cx='53' cy='53' r='7'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}></div>
-        </div>
       </div>
 
+      {/* Features + Product Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Panel - Service Features */}
           <div className="lg:col-span-1 space-y-6">
-
-            {/* Service Features */}
             <div className="bg-white p-6 rounded-2xl shadow-lg">
               <h3 className="text-xl font-bold text-gray-800 mb-4">Why Choose MilkTrail?</h3>
               <div className="space-y-4">
@@ -193,7 +182,6 @@ const MilkTrailApp = () => {
               </div>
             </div>
 
-            {/* Delivery Character */}
             <div className="relative bg-gradient-to-r from-green-50 to-blue-50 p-6 rounded-2xl">
               <div className="text-center">
                 <div className="text-6xl mb-4">🚚</div>
@@ -206,13 +194,11 @@ const MilkTrailApp = () => {
           {/* Right Panel - Products */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-2xl shadow-xl overflow-hidden mx-auto max-w-md">
-              {/* Mobile Header */}
               <div className="bg-gray-50 p-4 border-b flex items-center justify-between">
                 <h2 className="text-2xl font-bold text-gray-800">Products</h2>
                 <div className="text-sm text-gray-600">8:31</div>
               </div>
 
-              {/* Category Filter */}
               <div className="p-4 border-b bg-white">
                 <div className="flex space-x-2 overflow-x-auto">
                   {categories.map((category) => (
@@ -232,19 +218,20 @@ const MilkTrailApp = () => {
                 </div>
               </div>
 
-              {/* Products List */}
               <div className="max-h-96 overflow-y-auto">
                 <div className="divide-y divide-gray-100">
                   {filteredProducts.map((product) => (
                     <div key={product.id} className="p-4 hover:bg-gray-50 transition-colors">
                       <div className="flex items-center space-x-4">
                         <div className="text-4xl">{product.image}</div>
-                        
+
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center space-x-2 mb-1">
                             <h3 className="text-lg font-semibold text-gray-800">{product.name}</h3>
                             {!product.inStock && (
-                              <span className="text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">Out of Stock</span>
+                              <span className="text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">
+                                Out of Stock
+                              </span>
                             )}
                           </div>
                           <p className="text-sm text-gray-600 mb-1">{product.description}</p>
@@ -257,7 +244,6 @@ const MilkTrailApp = () => {
                           </div>
                           <div className="text-lg font-bold text-gray-800">₹{product.price.toFixed(2)}</div>
                         </div>
-                        
                       </div>
                     </div>
                   ))}
@@ -267,8 +253,8 @@ const MilkTrailApp = () => {
           </div>
         </div>
       </div>
-      </div>
-    );
-  };
+    </div>
+  );
+};
 
 export default MilkTrailApp;

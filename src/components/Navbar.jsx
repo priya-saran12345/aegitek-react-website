@@ -1,10 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { MapPin, Mail, Phone, Menu, X, ChevronDown } from 'lucide-react';
-import { Link} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-// Mock useLocation hook - Replace with actual React Router useLocation in production
-const useLocation = () => ({ pathname: window.location.pathname });
-window.scrollTo(0, 0);
 // Memoized ContactItem component for performance
 const ContactItem = React.memo(({ icon, label, value }) => (
   <div className="flex items-center space-x-3">
@@ -157,34 +154,16 @@ const Navbar = () => {
   // Memoize current path for performance
   const currentPath = useMemo(() => location.pathname, [location.pathname]);
 
-  // Optimized scroll handler with throttling
+  // Enhanced scroll handler with the new threshold
   const handleScroll = useCallback(() => {
-    const scrolled = window.scrollY > 100;
-    if (scrolled !== isScrolled) {
-      setIsScrolled(scrolled);
-    }
-  }, [isScrolled]);
+    setIsScrolled(window.scrollY > 80);
+  }, []);
 
-  // Throttled scroll handler using RAF
-  const throttledScrollHandler = useMemo(() => {
-    let rafId = null;
-    return () => {
-      if (rafId === null) {
-        rafId = requestAnimationFrame(() => {
-          handleScroll();
-          rafId = null;
-        });
-      }
-    };
-  }, [handleScroll]);
-
-  // Setup scroll listener
+  // Setup scroll listener with passive option for better performance
   useEffect(() => {
-    window.addEventListener('scroll', throttledScrollHandler, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', throttledScrollHandler);
-    };
-  }, [throttledScrollHandler]);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -198,12 +177,13 @@ const Navbar = () => {
     return () => document.removeEventListener('click', handleClickOutside);
   }, [activeDropdown]);
 
-  // Close menus when route changes
+  // Enhanced route change handler with smooth scroll to top and menu cleanup
   useEffect(() => {
     setIsMobileMenuOpen(false);
     setActiveDropdown(null);
     setMobileDropdowns({});
-  }, [currentPath]);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [location.pathname]);
 
   // Handle keyboard navigation
   useEffect(() => {
