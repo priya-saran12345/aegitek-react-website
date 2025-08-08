@@ -292,13 +292,13 @@ const Navbar = () => {
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-8 ml-auto">
-              <NavLink 
+              {/* <NavLink 
                 to="/" 
                 isActive={isActivePath('/')} 
                 isScrolled={isScrolled}
               >
                 Home
-              </NavLink>
+              </NavLink> */}
 
               <NavLink 
                 to="/AboutPage" 
@@ -382,13 +382,13 @@ const Navbar = () => {
           >
             <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-6">
               <div className="space-y-1">
-                <MobileNavLink 
+                {/* <MobileNavLink 
                   to="/" 
                   onClick={closeMobileMenu}
                   isActive={isActivePath('/')}
                 >
                   Home
-                </MobileNavLink>
+                </MobileNavLink> */}
 
                 <MobileNavLink 
                   to="/AboutPage" 
@@ -518,13 +518,13 @@ const Navbar = () => {
           <div className="relative bg-white mx-4 mt-4 rounded-lg shadow-xl max-h-[80vh] overflow-y-auto">
             <div className="p-6">
               <div className="space-y-1">
-                <MobileNavLink 
+                {/* <MobileNavLink 
                   to="/" 
                   onClick={closeMobileMenu}
                   isActive={isActivePath('/')}
                 >
                   Home
-                </MobileNavLink>
+                </MobileNavLink> */}
 
                 <MobileNavLink 
                   to="/AboutPage" 

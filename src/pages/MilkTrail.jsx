@@ -9,7 +9,7 @@ const MilkTrailApp = () => {
     {
       id: 1,
       name: 'Whole Milk',
-      price: 5.0,
+      price: 70,
       image: '🥛',
       category: 'milk',
       description: 'Fresh, creamy whole milk from local farms',
@@ -20,7 +20,7 @@ const MilkTrailApp = () => {
     {
       id: 2,
       name: 'Paneer',
-      price: 5.0,
+      price: 80,
       image: '🧀',
       category: 'dairy',
       description: 'Fresh homemade paneer, perfect for cooking',
@@ -31,7 +31,7 @@ const MilkTrailApp = () => {
     {
       id: 3,
       name: 'Ghee',
-      price: 8.0,
+      price: 150,
       image: '🫙',
       category: 'dairy',
       description: 'Pure desi ghee made from cow milk',
@@ -42,7 +42,7 @@ const MilkTrailApp = () => {
     {
       id: 4,
       name: 'Curd',
-      price: 2.8,
+      price: 100,
       image: '🥣',
       category: 'dairy',
       description: 'Fresh yogurt, rich in probiotics',
@@ -53,7 +53,7 @@ const MilkTrailApp = () => {
     {
       id: 5,
       name: 'Butter',
-      price: 4.0,
+      price: 80,
       image: '🧈',
       category: 'dairy',
       description: 'Creamy fresh butter, unsalted',
@@ -64,7 +64,7 @@ const MilkTrailApp = () => {
     {
       id: 6,
       name: 'Toned Milk',
-      price: 4.5,
+      price: 60,
       image: '🥛',
       category: 'milk',
       description: 'Low-fat toned milk, healthy choice',
@@ -165,7 +165,7 @@ const MilkTrailApp = () => {
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
                   <Truck className="w-5 h-5 text-blue-600" />
-                  <span className="text-gray-700">Free delivery on orders above ₹25</span>
+                  <span className="text-gray-700">Free delivery on orders above ₹100</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Clock className="w-5 h-5 text-green-600" />

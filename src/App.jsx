@@ -91,7 +91,7 @@ import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import ServicePge from "./components/ServicePge";
 import About from "./components/About";
-import AutoSlide from "./components/AutoSlide";
+// import AutoSlide from "./components/AutoSlide";
 import WhyChooseUs from "./components/WhyChooseUs";
 import Contact from "./components/Contact";
 
@@ -119,7 +119,7 @@ const HomePage = () => (
     <Hero />
     <ServicePge />
     <About />
-    <AutoSlide />
+    {/* <AutoSlide /> */}
     <WhyChooseUs />
     <Contact />
   </>
