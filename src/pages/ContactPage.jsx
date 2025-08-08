@@ -1,5 +1,6 @@
+
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Youtube, Clock, ArrowRight, Linkedin } from 'lucide-react'; // Added Clock icon
+import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Youtube, Clock, ArrowRight, Linkedin } from 'lucide-react';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ export default function ContactPage() {
   });
 
   const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (e) => {
     setFormData({
@@ -19,13 +21,114 @@ export default function ContactPage() {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-    console.log('Form submitted:', formData);
-    // In a real application, you would send this data to a server
-    // For now, we'll use a simple alert (though in a real app, use a modal)
-    alert('Thank you for your message! We will contact you soon.');
-    setFormData({ // Clear form after submission
+  // Form validation function
+  const validateForm = () => {
+    const errors = [];
+    
+    if (!formData.name.trim()) {
+      errors.push('Name is required');
+    }
+    
+    if (!formData.email.trim()) {
+      errors.push('Email is required');
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errors.push('Please enter a valid email address');
+    }
+    
+    if (!formData.phone.trim()) {
+      errors.push('Phone number is required');
+    } else if (!/^[\+]?[\d\s\-\(\)]{10,}$/.test(formData.phone.replace(/\s/g, ''))) {
+      errors.push('Please enter a valid phone number');
+    }
+    
+    if (!formData.message.trim()) {
+      errors.push('Message is required');
+    }
+    
+    return errors;
+  };
+
+  // Method 1: Using EmailJS (Recommended for client-side)
+  const handleSubmitWithEmailJS = async (e) => {
+    e.preventDefault();
+    
+    // Validate form before submission
+    const validationErrors = validateForm();
+    if (validationErrors.length > 0) {
+      // alert('Please fix the following errors:\n' + validationErrors.join('\n'));
+      return;
+    }
+    
+    setIsSubmitting(true);
+
+    try {
+      // EmailJS service - you need to set up an account at emailjs.com
+      // Replace 'YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', 'YOUR_PUBLIC_KEY' with actual values
+      const emailParams = {
+        to_email: 'aegiteksolution@gmail.com',
+        from_name: formData.name,
+        from_email: formData.email,
+        phone: formData.phone,
+        website: formData.website,
+        message: formData.message,
+        reply_to: formData.email
+      };
+
+      // Uncomment and configure when you set up EmailJS
+      /*
+      const result = await emailjs.send(
+        'YOUR_SERVICE_ID',
+        'YOUR_TEMPLATE_ID',
+        emailParams,
+        'YOUR_PUBLIC_KEY'
+      );
+      */
+
+      // Simulating email send for demo
+      console.log('Email would be sent with:', emailParams);
+      // alert('Thank you for your message! We will contact you soon.');
+      
+      // Clear form after successful submission
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        website: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Failed to send email:', error);
+      alert('Sorry, there was an error sending your message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // Method 2: Using mailto (opens email client)
+  const handleSubmitWithMailto = (e) => {
+    e.preventDefault();
+    
+    // Validate form before submission
+    const validationErrors = validateForm();
+    if (validationErrors.length > 0) {
+      // alert('Please fix the following errors:\n' + validationErrors.join('\n'));
+      return;
+    }
+    
+    const subject = encodeURIComponent(`Contact Form Submission from ${formData.name}`);
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\n` +
+      `Email: ${formData.email}\n` +
+      `Phone: ${formData.phone}\n` +
+      `Website: ${formData.website}\n\n` +
+      `Message:\n${formData.message}`
+    );
+    
+    const mailtoLink = `mailto:aegiteksolution@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = mailtoLink;
+    
+    // Clear form
+    setFormData({
       name: '',
       email: '',
       phone: '',
@@ -34,14 +137,54 @@ export default function ContactPage() {
     });
   };
 
+  // Method 3: Send to your backend API
+  const handleSubmitToBackend = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          to_email: 'aegiteksolution@gmail.com'
+        })
+      });
+
+      if (response.ok) {
+        // alert('Thank you for your message! We will contact you soon.');
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          website: '',
+          message: ''
+        });
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // alert('Sorry, there was an error sending your message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // For demo purposes, using the EmailJS method
+  const handleSubmit = handleSubmitWithEmailJS;
+
   const handleNewsletterSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault();
     console.log('Newsletter subscription:', newsletterEmail);
-    alert('Thank you for subscribing to our newsletter!');
+    // alert('Thank you for subscribing to our newsletter!');
     setNewsletterEmail('');
   };
 
-  // Reordered and structured contact data to match the desired layout
+  // Contact information cards data
   const addressCard = {
     icon: <MapPin className="w-6 h-6" />,
     title: "Our Address",
@@ -71,13 +214,12 @@ export default function ContactPage() {
     content: "info@aegitek.com"
   };
 
-
   return (
     <div className="min-h-screen bg-white font-['Inter']">
       {/* Hero Section */}
       <section className="relative h-[300px] md:h-[400px] bg-cover bg-center flex items-center justify-center"
-        style={{ backgroundImage: "url('/assets/bg-1.jpg')" }}>
-        <div className="absolute inset-0 bg-black opacity-40"></div> {/* Overlay for text readability */}
+       style={{ backgroundImage: "url('/assets/bg-1.jpg')" }}>
+        <div className="absolute inset-0 bg-black opacity-20"></div>
         <div className="relative z-10 text-center text-white p-4">
           <h1 className="text-4xl lg:text-5xl font-bold mb-4 drop-shadow-lg">
             Contact Us
@@ -96,7 +238,7 @@ export default function ContactPage() {
             <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center lg:text-left">
               Get in Touch
             </h2>
-            <div className="space-y-6"> {/* Container for all contact cards */}
+            <div className="space-y-6">
               {/* Address Card (Full Width) */}
               <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-gray-100 text-center sm:text-left">
                 <div className="flex items-center justify-center sm:justify-start space-x-4 mb-4">
@@ -163,16 +305,16 @@ export default function ContactPage() {
           </div>
 
           {/* Right - Contact Form */}
-          <div className="bg-white p-8 mt-15 h-[650px] md:h-[550px]  rounded-xl shadow-lg border border-gray-100">
+          <div className="bg-white p-8 mt-15 h-[650px] md:h-[550px] rounded-xl shadow-lg border border-gray-100">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">
               Send Us a Message
             </h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-6">
               <div className="grid md:grid-cols-2 gap-4">
                 <input
                   type="text"
                   name="name"
-                  placeholder="Your Name"
+                  placeholder="Your Name *"
                   value={formData.name}
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#189CD2] focus:border-transparent outline-none transition-all duration-200"
@@ -181,7 +323,7 @@ export default function ContactPage() {
                 <input
                   type="email"
                   name="email"
-                  placeholder="Your E-Mail"
+                  placeholder="Your E-Mail *"
                   value={formData.email}
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#189CD2] focus:border-transparent outline-none transition-all duration-200"
@@ -193,10 +335,11 @@ export default function ContactPage() {
                 <input
                   type="tel"
                   name="phone"
-                  placeholder="Phone Number (Optional)"
+                  placeholder="Phone Number *"
                   value={formData.phone}
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#189CD2] focus:border-transparent outline-none transition-all duration-200"
+                  required
                 />
                 <input
                   type="url"
@@ -210,7 +353,7 @@ export default function ContactPage() {
 
               <textarea
                 name="message"
-                placeholder="Your message Here"
+                placeholder="Your message Here *"
                 value={formData.message}
                 onChange={handleInputChange}
                 rows={5}
@@ -219,14 +362,16 @@ export default function ContactPage() {
               ></textarea>
 
               <button
-                type="submit"
-                className="inline-flex items-center justify-center px-8 py-4 rounded-full text-white font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                type="button"
+                onClick={handleSubmit}
+                disabled={isSubmitting}
+                className="inline-flex items-center justify-center px-8 py-4 rounded-full text-white font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{ backgroundImage: 'linear-gradient(250deg, #4e95ed 0%, #189cd2 100%)' }}
               >
-                Submit Now
+                {isSubmitting ? 'Sending...' : 'Submit Now'}
                 <ArrowRight className="ml-3 h-5 w-5" />
               </button>
-            </form>
+            </div>
           </div>
         </div>
       </section>
@@ -243,7 +388,6 @@ export default function ContactPage() {
             </p>
           </div>
           <div className="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden shadow-lg border border-gray-100">
-            {/* Updated Google Map Embed */}
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1063.047184089114!2d77.04728095931355!3d28.558087101017314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1b00609ae89b%3A0x542e45088cb8670e!2sAegitek%20Solutions!5e0!3m2!1sen!2sin!4v1753781462133!5m2!1sen!2sin"
               width="100%"

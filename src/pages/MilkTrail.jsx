@@ -116,7 +116,7 @@ const MilkTrailApp = () => {
               {/* Hero Stats */}
               <div className="grid grid-cols-3 gap-8 py-8">
                 <div className="text-center bg-white/50 backdrop-blur-sm rounded-2xl p-4 shadow-lg">
-                  <div className="text-3xl font-bold text-blue-400">50K+</div>
+                  <div className="text-3xl font-bold text-blue-400">10K+</div>
                   <div className="text-gray-600 text-sm font-medium">Happy Customers</div>
                 </div>
                 <div className="text-center bg-white/50 backdrop-blur-sm rounded-2xl p-4 shadow-lg">
