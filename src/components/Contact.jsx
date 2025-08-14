@@ -4,9 +4,9 @@ import emailjs from "@emailjs/browser";
 import toast, { Toaster } from "react-hot-toast";
 
 /** 🔧 Edit these IDs or move to env vars */
-const SERVICE_ID = "service_wis93ab";
-const TEMPLATE_ID = "template_fkarr4i";
-const PUBLIC_KEY  = "bK7GMdr_55GNnbreb";
+const SERVICE_ID = "service_yndr95n";
+const TEMPLATE_ID = "template_j9020cn";
+const PUBLIC_KEY  = "u5Ej9xPMYWFxshntV";
 
 /** 🧱 Dynamic field config — title added first, website removed */
 const FIELDS = [

@@ -7,10 +7,9 @@ import emailjs from '@emailjs/browser';
 import toast, { Toaster } from 'react-hot-toast';
 
 /** EmailJS IDs (move to env vars in prod) */
-const SERVICE_ID = 'service_wis93ab';
-const TEMPLATE_ID = 'template_fkarr4i';
-const PUBLIC_KEY  = 'bK7GMdr_55GNnbreb';
-
+const SERVICE_ID = "service_yndr95n";
+const TEMPLATE_ID = "template_j9020cn";
+const PUBLIC_KEY  = "u5Ej9xPMYWFxshntV";
 /** Dynamic form fields (website removed, title added first) */
 const FIELDS = [
   { name: 'title',  label: 'Subject',      type: 'text',     required: false },
