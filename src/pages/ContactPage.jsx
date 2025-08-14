@@ -1,245 +1,151 @@
+import React, { useMemo, useState } from 'react';
+import {
+  Phone, Mail, MapPin, Facebook, Instagram, Youtube, Clock,
+  ArrowRight, Linkedin, CheckCircle, AlertCircle
+} from 'lucide-react';
+import emailjs from '@emailjs/browser';
+import toast, { Toaster } from 'react-hot-toast';
 
-import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Youtube, Clock, ArrowRight, Linkedin } from 'lucide-react';
+/** EmailJS IDs (move to env vars in prod) */
+const SERVICE_ID = 'service_wis93ab';
+const TEMPLATE_ID = 'template_fkarr4i';
+const PUBLIC_KEY  = 'bK7GMdr_55GNnbreb';
+
+/** Dynamic form fields (website removed, title added first) */
+const FIELDS = [
+  { name: 'title',  label: 'Subject',      type: 'text',     required: false },
+  { name: 'name',   label: 'Name',         type: 'text',     required: true  },
+  { name: 'email',  label: 'E-Mail',       type: 'email',    required: true  },
+  { name: 'number', label: 'Phone Number', type: 'tel',      required: false },
+  { name: 'message',label: 'Message',      type: 'textarea', required: true  },
+];
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    website: '',
-    message: ''
-  });
-
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  // Form validation function
-  const validateForm = () => {
-    const errors = [];
-    
-    if (!formData.name.trim()) {
-      errors.push('Name is required');
-    }
-    
-    if (!formData.email.trim()) {
-      errors.push('Email is required');
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      errors.push('Please enter a valid email address');
-    }
-    
-    if (!formData.phone.trim()) {
-      errors.push('Phone number is required');
-    } else if (!/^[\+]?[\d\s\-\(\)]{10,}$/.test(formData.phone.replace(/\s/g, ''))) {
-      errors.push('Please enter a valid phone number');
-    }
-    
-    if (!formData.message.trim()) {
-      errors.push('Message is required');
-    }
-    
-    return errors;
-  };
-
-  // Method 1: Using EmailJS (Recommended for client-side)
-  const handleSubmitWithEmailJS = async (e) => {
-    e.preventDefault();
-    
-    // Validate form before submission
-    const validationErrors = validateForm();
-    if (validationErrors.length > 0) {
-      // alert('Please fix the following errors:\n' + validationErrors.join('\n'));
-      return;
-    }
-    
-    setIsSubmitting(true);
-
-    try {
-      // EmailJS service - you need to set up an account at emailjs.com
-      // Replace 'YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', 'YOUR_PUBLIC_KEY' with actual values
-      const emailParams = {
-        to_email: 'aegiteksolution@gmail.com',
-        from_name: formData.name,
-        from_email: formData.email,
-        phone: formData.phone,
-        website: formData.website,
-        message: formData.message,
-        reply_to: formData.email
-      };
-
-      // Uncomment and configure when you set up EmailJS
-      /*
-      const result = await emailjs.send(
-        'YOUR_SERVICE_ID',
-        'YOUR_TEMPLATE_ID',
-        emailParams,
-        'YOUR_PUBLIC_KEY'
-      );
-      */
-
-      // Simulating email send for demo
-      console.log('Email would be sent with:', emailParams);
-      // alert('Thank you for your message! We will contact you soon.');
-      
-      // Clear form after successful submission
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        website: '',
-        message: ''
-      });
-    } catch (error) {
-      console.error('Failed to send email:', error);
-      alert('Sorry, there was an error sending your message. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  // Method 2: Using mailto (opens email client)
-  const handleSubmitWithMailto = (e) => {
-    e.preventDefault();
-    
-    // Validate form before submission
-    const validationErrors = validateForm();
-    if (validationErrors.length > 0) {
-      // alert('Please fix the following errors:\n' + validationErrors.join('\n'));
-      return;
-    }
-    
-    const subject = encodeURIComponent(`Contact Form Submission from ${formData.name}`);
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\n` +
-      `Email: ${formData.email}\n` +
-      `Phone: ${formData.phone}\n` +
-      `Website: ${formData.website}\n\n` +
-      `Message:\n${formData.message}`
-    );
-    
-    const mailtoLink = `mailto:aegiteksolution@gmail.com?subject=${subject}&body=${body}`;
-    window.location.href = mailtoLink;
-    
-    // Clear form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      website: '',
-      message: ''
-    });
-  };
-
-  // Method 3: Send to your backend API
-  const handleSubmitToBackend = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...formData,
-          to_email: 'aegiteksolution@gmail.com'
-        })
-      });
-
-      if (response.ok) {
-        // alert('Thank you for your message! We will contact you soon.');
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          website: '',
-          message: ''
-        });
-      } else {
-        throw new Error('Failed to send message');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      // alert('Sorry, there was an error sending your message. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  // For demo purposes, using the EmailJS method
-  const handleSubmit = handleSubmitWithEmailJS;
-
-  const handleNewsletterSubmit = (e) => {
-    e.preventDefault();
-    console.log('Newsletter subscription:', newsletterEmail);
-    // alert('Thank you for subscribing to our newsletter!');
-    setNewsletterEmail('');
-  };
-
-  // Contact information cards data
+  // ----- Left column data (unchanged) -----
   const addressCard = {
     icon: <MapPin className="w-6 h-6" />,
-    title: "Our Address",
-    content: "Aegitek Solutions Private Limited, Plot No 117, Pocket 4 Block B, Dwarka Sector 23, Opposite Pillar no 180 Yashobhoomi, New Delhi 110075"
+    title: 'Our Address',
+    content:
+      'Aegitek Solutions Private Limited, Plot No 117, Pocket 4 Block B, Dwarka Sector 23, Opposite Pillar no 180 Yashobhoomi, New Delhi 110075'
   };
-
   const businessHoursCard = {
     icon: <Clock className="w-6 h-6" />,
-    title: "Business Hours",
+    title: 'Business Hours',
     content: (
       <>
         Monday - Friday: 10:00 AM - 6:00 PM<br />
-        Saturday & Sunday: Closed
+        Saturday &amp; Sunday: Closed
       </>
     )
   };
+  const phoneCard = { icon: <Phone className="w-6 h-6" />, title: 'Phone', content: '+91-9119995726' };
+  const emailCard = { icon: <Mail className="w-6 h-6" />, title: 'Email', content: 'info@aegitek.com' };
 
-  const phoneCard = {
-    icon: <Phone className="w-6 h-6" />,
-    title: "Phone",
-    content: "+91-9119995726"
+  // ----- Dynamic form state/handlers -----
+  const initialState = useMemo(
+    () => FIELDS.reduce((acc, f) => ({ ...acc, [f.name]: '' }), {}),
+    []
+  );
+  const [formData, setFormData] = useState(initialState);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null); // 'success' | 'error' | null
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((p) => ({ ...p, [name]: value }));
   };
 
-  const emailCard = {
-    icon: <Mail className="w-6 h-6" />,
-    title: "Email",
-    content: "info@aegitek.com"
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    // validate required fields from config
+    const missing = FIELDS.filter(f => f.required && !String(formData[f.name]).trim()).map(f => f.label);
+    if (missing.length) {
+      toast.error(`Please fill: ${missing.join(', ')}`);
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const templateParams = {
+        ...formData,                              // title, name, email, number, message
+        phone: formData.number || '',             // alias if EmailJS template uses {{phone}}
+        reply_to: formData.email,
+        to_name: 'Aegitek Team',
+        from_name: formData.name,
+        from_email: formData.email,
+      };
+
+      await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+      setSubmitStatus('success');
+      toast.success('Message sent successfully!');
+      setFormData(initialState);
+    } catch (err) {
+      console.error('EmailJS Error:', err);
+      setSubmitStatus('error');
+      toast.error('Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setSubmitStatus(null), 5000);
+    }
+  };
+
+  const renderField = (f) => {
+    const baseProps = {
+      name: f.name,
+      value: formData[f.name],
+      onChange: handleInputChange,
+      required: !!f.required,
+      placeholder: `${f.label}${f.required ? ' *' : ''}`,
+      className:
+        'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#189CD2] focus:border-transparent outline-none transition-all duration-200',
+      autoComplete:
+        f.type === 'email' ? 'email' :
+        f.type === 'tel'   ? 'tel'   :
+        f.name === 'name'  ? 'name'  : 'off',
+    };
+
+    if (f.type === 'textarea') {
+      return (
+        <textarea
+          key={f.name}
+          rows={5}
+          className={`${baseProps.className} resize-none`}
+          {...baseProps}
+        />
+      );
+    }
+    return <input key={f.name} type={f.type || 'text'} {...baseProps} />;
   };
 
   return (
     <div className="min-h-screen bg-white font-['Inter']">
-      {/* Hero Section */}
-      <section className="relative h-[300px] md:h-[400px] bg-cover bg-center flex items-center justify-center"
-       style={{ backgroundImage: "url('/assets/bg-1.jpg')" }}>
-        <div className="absolute inset-0 bg-black opacity-20"></div>
+      <Toaster position="top-right" />
+
+      {/* Hero */}
+      <section
+        className="relative h-[300px] md:h-[400px] bg-cover bg-center flex items-center justify-center"
+        style={{ backgroundImage: "url('/assets/bg-1.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-black opacity-20" />
         <div className="relative z-10 text-center text-white p-4">
-          <h1 className="text-4xl lg:text-5xl font-bold mb-4 drop-shadow-lg">
-            Contact Us
-          </h1>
+          <h1 className="text-4xl lg:text-5xl font-bold mb-4 drop-shadow-lg">Contact Us</h1>
           <p className="text-lg lg:text-xl max-w-3xl mx-auto drop-shadow-md">
             We're here to help. Reach out to our team for any inquiries or to start your next project.
           </p>
         </div>
       </section>
 
-      {/* Main Contact Content Section */}
+      {/* Main */}
       <section className="py-20 px-4 bg-gray-50">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12">
-          {/* Left - Contact Information Cards */}
+          {/* Left: info cards (unchanged) */}
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center lg:text-left">
-              Get in Touch
-            </h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center lg:text-left">Get in Touch</h2>
+
             <div className="space-y-6">
-              {/* Address Card (Full Width) */}
               <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-gray-100 text-center sm:text-left">
                 <div className="flex items-center justify-center sm:justify-start space-x-4 mb-4">
                   <div className="flex-shrink-0 p-3 rounded-full text-white shadow-md" style={{ backgroundColor: '#189CD2' }}>
@@ -250,7 +156,6 @@ export default function ContactPage() {
                 <p className="text-gray-600 leading-relaxed">{addressCard.content}</p>
               </div>
 
-              {/* Business Hours Card (Full Width) */}
               <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-gray-100 text-center sm:text-left">
                 <div className="flex items-center justify-center sm:justify-start space-x-4 mb-4">
                   <div className="flex-shrink-0 p-3 rounded-full text-white shadow-md" style={{ backgroundColor: '#189CD2' }}>
@@ -261,7 +166,6 @@ export default function ContactPage() {
                 <p className="text-gray-600 leading-relaxed">{businessHoursCard.content}</p>
               </div>
 
-              {/* Phone and Email Cards (Two Columns) */}
               <div className="grid sm:grid-cols-2 gap-6">
                 <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-gray-100 text-center sm:text-left">
                   <div className="flex items-center justify-center sm:justify-start space-x-4 mb-4">
@@ -284,7 +188,6 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Social Media Links */}
             <div className="mt-10 text-center lg:text-left">
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Follow Us</h3>
               <div className="flex space-x-4 justify-center lg:justify-start">
@@ -304,66 +207,74 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Right - Contact Form */}
-          <div className="bg-white p-8 mt-15 h-[650px] md:h-[550px] rounded-xl shadow-lg border border-gray-100">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">
-              Send Us a Message
-            </h2>
-            <div className="space-y-6">
+          {/* Right: REPLACED FORM */}
+          <div className="bg-white p-8 mt-15 h-[650px] md:h-[550px] rounded-xl shadow-lg border border-gray-100 overflow-auto">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
+
+            {/* Status Messages */}
+            {submitStatus === 'success' && (
+              <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center space-x-3">
+                <CheckCircle className="w-5 h-5 text-green-600" />
+                <div>
+                  <p className="text-green-800 font-medium">Message sent successfully!</p>
+                  <p className="text-green-600 text-sm">We’ll get back to you as soon as possible.</p>
+                </div>
+              </div>
+            )}
+            {submitStatus === 'error' && (
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center space-x-3">
+                <AlertCircle className="w-5 h-5 text-red-600" />
+                <div>
+                  <p className="text-red-800 font-medium">Something went wrong!</p>
+                  <p className="text-red-600 text-sm">Please check your information and try again.</p>
+                </div>
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+              {/* grid for non-textarea fields */}
               <div className="grid md:grid-cols-2 gap-4">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Your Name *"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#189CD2] focus:border-transparent outline-none transition-all duration-200"
-                  required
-                />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Your E-Mail *"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#189CD2] focus:border-transparent outline-none transition-all duration-200"
-                  required
-                />
+                {FIELDS.filter(f => f.type !== 'textarea').map((f) => {
+                  const common =
+                    'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#189CD2] focus:border-transparent outline-none transition-all duration-200';
+                  const props = {
+                    name: f.name,
+                    value: formData[f.name],
+                    onChange: handleInputChange,
+                    required: f.required,
+                    placeholder: `${f.label}${f.required ? ' *' : ''}`,
+                    autoComplete:
+                      f.type === 'email' ? 'email' :
+                      f.type === 'tel'   ? 'tel'   :
+                      f.name === 'name'  ? 'name'  : 'off',
+                    className: common,
+                  };
+                  return <input key={f.name} type={f.type || 'text'} {...props} />;
+                })}
               </div>
 
-              <div className="grid md:grid-cols-2 gap-4">
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="Phone Number *"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#189CD2] focus:border-transparent outline-none transition-all duration-200"
-                  required
-                />
-                <input
-                  type="url"
-                  name="website"
-                  placeholder="Your Website (Optional)"
-                  value={formData.website}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#189CD2] focus:border-transparent outline-none transition-all duration-200"
-                />
+              {/* textarea full width */}
+              <div>
+                {FIELDS.filter(f => f.type === 'textarea').map((f) => {
+                  const common =
+                    'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#189CD2] focus:border-transparent outline-none transition-all duration-200';
+                  return (
+                    <textarea
+                      key={f.name}
+                      name={f.name}
+                      value={formData[f.name]}
+                      onChange={handleInputChange}
+                      required={f.required}
+                      rows={5}
+                      placeholder={`${f.label}${f.required ? ' *' : ''}`}
+                      className={`${common} resize-none`}
+                    />
+                  );
+                })}
               </div>
-
-              <textarea
-                name="message"
-                placeholder="Your message Here *"
-                value={formData.message}
-                onChange={handleInputChange}
-                rows={5}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#189CD2] focus:border-transparent outline-none resize-none transition-all duration-200"
-                required
-              ></textarea>
 
               <button
-                type="button"
-                onClick={handleSubmit}
+                type="submit"
                 disabled={isSubmitting}
                 className="inline-flex items-center justify-center px-8 py-4 rounded-full text-white font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{ backgroundImage: 'linear-gradient(250deg, #4e95ed 0%, #189cd2 100%)' }}
@@ -371,21 +282,19 @@ export default function ContactPage() {
                 {isSubmitting ? 'Sending...' : 'Submit Now'}
                 <ArrowRight className="ml-3 h-5 w-5" />
               </button>
-            </div>
+            </form>
           </div>
         </div>
       </section>
 
-      {/* Google Map Section */}
+      {/* Map */}
       <section className="py-20 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
               Find Us on the <span className="text-[#189CD2]">Map</span>
             </h2>
-            <p className="text-lg text-gray-600">
-              Visit our office or get directions using the map below.
-            </p>
+            <p className="text-lg text-gray-600">Visit our office or get directions using the map below.</p>
           </div>
           <div className="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden shadow-lg border border-gray-100">
             <iframe
@@ -396,7 +305,7 @@ export default function ContactPage() {
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+            />
           </div>
         </div>
       </section>
