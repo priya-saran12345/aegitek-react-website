@@ -55,7 +55,7 @@ const SimpleSlider = () => {
   }, [slides.length]);
 
   return (
-    <div className="w-full h-screen relative overflow-hidden">
+    <div className="w-full h-screen relative overflow-hidden bg-black">
       <div className="relative h-full">
         {/* Main slider container */}
         {slides.map((slide, index) => (
